@@ -7,6 +7,8 @@ const session = require("express-session")
 const flash = require("connect-flash")
 const cors = require("cors")
 const fs = require("fs-extra")
+const multer = require("multer")
+const bcrypt = require("bcryptjs")
 
 const app = express()
 
@@ -15,11 +17,32 @@ async function ensureDirectories() {
   try {
     await fs.ensureDir(path.join(__dirname, "data"))
     await fs.ensureDir(path.join(__dirname, "public/uploads"))
+    await fs.ensureDir(path.join(__dirname, "public/uploads/blog"))
 
     // Create blog posts file if it doesn't exist
     const blogFile = path.join(__dirname, "data/blog-posts.json")
     if (!(await fs.pathExists(blogFile))) {
       await fs.writeJson(blogFile, [])
+    }
+
+    // Create users file if it doesn't exist
+    const usersFile = path.join(__dirname, "data/users.json")
+    if (!(await fs.pathExists(usersFile))) {
+      const defaultUser = {
+        id: 1,
+        username: "admin",
+        email: "admin@goldmineagencies.com",
+        password: await bcrypt.hash("admin123", 10),
+        role: "admin",
+        createdAt: new Date().toISOString(),
+      }
+      await fs.writeJson(usersFile, [defaultUser])
+    }
+
+    // Create contact submissions file
+    const contactFile = path.join(__dirname, "data/contact-submissions.json")
+    if (!(await fs.pathExists(contactFile))) {
+      await fs.writeJson(contactFile, [])
     }
   } catch (error) {
     console.error("Error ensuring directories:", error)
@@ -29,15 +52,45 @@ async function ensureDirectories() {
 // Initialize directories
 ensureDirectories()
 
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/uploads/blog/")
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
+    cb(null, file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname))
+  },
+})
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png|gif|webp/
+    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase())
+    const mimetype = allowedTypes.test(file.mimetype)
+
+    if (mimetype && extname) {
+      return cb(null, true)
+    } else {
+      cb(new Error("Only image files are allowed"))
+    }
+  },
+})
+
 // Import routes
 const homeRoutes = require("./routes/home")
 const aboutRoutes = require("./routes/about")
 const skillsRoutes = require("./routes/skills")
 const portfolioRoutes = require("./routes/portfolio")
-const achievementsRoutes = require("./routes/achievements")
+const servicesRoutes = require("./routes/services")
 const blogRoutes = require("./routes/blog")
 const contactRoutes = require("./routes/contact")
 const adminRoutes = require("./routes/admin")
+const authRoutes = require("./routes/auth")
 
 // Get port from environment or default
 const PORT = process.env.PORT || 3000
@@ -48,10 +101,28 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.tailwindcss.com"],
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "https://cdn.tailwindcss.com",
+          "https://cdnjs.cloudflare.com",
+          "https://cdn.quilljs.com",
+          "https://fonts.googleapis.com",
+        ],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "https://cdn.tailwindcss.com",
+          "https://cdn.quilljs.com",
+        ],
         imgSrc: ["'self'", "data:", "https:", "http:"],
-        fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+        fontSrc: [
+          "'self'",
+          "https://cdnjs.cloudflare.com",
+          "https://fonts.googleapis.com",
+          "https://fonts.gstatic.com",
+        ],
         connectSrc: ["'self'"],
       },
     },
@@ -78,7 +149,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 // Session configuration
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "fallback-secret-key-change-in-production",
+    secret: process.env.SESSION_SECRET || "goldmine-portfolio-secret-key-2024",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -110,6 +181,8 @@ app.use((req, res, next) => {
   res.locals.messages = req.flash()
   res.locals.user = req.session.user || null
   res.locals.siteUrl = process.env.SITE_URL || `http://localhost:${PORT}`
+  res.locals.siteName = "Goldmine Portfolio"
+  res.locals.ownerName = "Director, Goldmine Agencies"
   next()
 })
 
@@ -128,10 +201,21 @@ app.use("/", homeRoutes)
 app.use("/about", aboutRoutes)
 app.use("/skills", skillsRoutes)
 app.use("/portfolio", portfolioRoutes)
-app.use("/achievements", achievementsRoutes)
+app.use("/services", servicesRoutes)
 app.use("/blog", blogRoutes)
 app.use("/contact", contactRoutes)
 app.use("/admin", adminRoutes)
+app.use("/auth", authRoutes)
+
+// File upload endpoint
+app.post("/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" })
+  }
+
+  const fileUrl = `/uploads/blog/${req.file.filename}`
+  res.json({ url: fileUrl })
+})
 
 // 404 handler
 app.use((req, res) => {
@@ -167,10 +251,11 @@ process.on("SIGINT", () => {
 
 // Start server
 const server = app.listen(PORT, () => {
-  console.log(`🚀 Portfolio Server Started`)
+  console.log(`🚀 Goldmine Portfolio Server Started`)
   console.log(`📱 Port: ${PORT}`)
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`)
   console.log(`⏰ Started at: ${new Date().toISOString()}`)
+  console.log(`👤 Default Admin: admin / admin123`)
 
   if (process.env.NODE_ENV !== "production") {
     console.log(`🔗 Local URL: http://localhost:${PORT}`)
