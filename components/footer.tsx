@@ -3,69 +3,81 @@ import { Github, Linkedin, Twitter, Mail } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-6xl mx-auto px-4">
+    <footer className="bg-gray-50 dark:bg-gray-900 border-t">
+      <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Portfolio</h3>
-            <p className="text-gray-300 mb-4">
-              Passionate developer, data scientist, and educator dedicated to creating innovative solutions and sharing
-              knowledge with the community.
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Portfolio</h3>
+            <p className="text-sm text-muted-foreground">
+              Full-stack developer specializing in modern web technologies, data science, and cybersecurity solutions.
             </p>
-            <div className="flex space-x-4">
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Github className="h-6 w-6" />
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Linkedin className="h-6 w-6" />
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Twitter className="h-6 w-6" />
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Mail className="h-6 w-6" />
-              </Link>
-            </div>
           </div>
 
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/about" className="text-muted-foreground hover:text-primary">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/skills" className="text-gray-300 hover:text-white transition-colors">
-                  Skills
-                </Link>
-              </li>
-              <li>
-                <Link href="/portfolio" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/portfolio" className="text-muted-foreground hover:text-primary">
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/blog" className="text-muted-foreground hover:text-primary">
                   Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-muted-foreground hover:text-primary">
+                  Contact
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <ul className="space-y-2 text-gray-300">
-              <li>Email: your.email@example.com</li>
-              <li>Phone: +1 (555) 123-4567</li>
-              <li>Location: Your City, Country</li>
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Services</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <span className="text-muted-foreground">Web Development</span>
+              </li>
+              <li>
+                <span className="text-muted-foreground">Data Science</span>
+              </li>
+              <li>
+                <span className="text-muted-foreground">Cybersecurity</span>
+              </li>
+              <li>
+                <span className="text-muted-foreground">Digital Marketing</span>
+              </li>
             </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Connect</h3>
+            <div className="flex space-x-4">
+              <Link href="#" className="text-muted-foreground hover:text-primary">
+                <Github className="h-5 w-5" />
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary">
+                <Linkedin className="h-5 w-5" />
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary">
+                <Twitter className="h-5 w-5" />
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary">
+                <Mail className="h-5 w-5" />
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
-          <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
+          <p>&copy; 2024 Portfolio. All rights reserved.</p>
         </div>
       </div>
     </footer>

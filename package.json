@@ -1,33 +1,13 @@
 {
-  "name": "goldmine-portfolio",
-  "version": "2.0.0",
-  "description": "Professional portfolio website with CMS blog editor for Goldmine Agencies",
-  "keywords": [
-    "portfolio",
-    "cms",
-    "blog",
-    "nodejs",
-    "express",
-    "educational-technology",
-    "data-science",
-    "cybersecurity",
-    "digital-marketing"
-  ],
-  "homepage": "https://goldmineagencies.com",
-  "bugs": {
-    "url": "https://github.com/goldmine-agencies/portfolio/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/goldmine-agencies/portfolio"
-  },
-  "license": "MIT",
-  "author": "Goldmine Agencies",
-  "main": "server.js",
+  "name": "portfolio-website",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start",
+    "vercel-build": "next build"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "latest",
@@ -49,6 +29,7 @@
     "@radix-ui/react-scroll-area": "latest",
     "@radix-ui/react-select": "latest",
     "@radix-ui/react-separator": "latest",
+    "@radix-ui/react-sheet": "^1.0.0",
     "@radix-ui/react-slider": "latest",
     "@radix-ui/react-slot": "latest",
     "@radix-ui/react-switch": "latest",
@@ -57,9 +38,8 @@
     "@radix-ui/react-toggle": "latest",
     "@radix-ui/react-toggle-group": "latest",
     "@radix-ui/react-tooltip": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
     "archiver": "latest",
+    "autoprefixer": "^10.0.1",
     "bcryptjs": "latest",
     "canvas": "latest",
     "class-variance-authority": "^0.7.1",
@@ -68,8 +48,8 @@
     "compression": "latest",
     "connect-flash": "latest",
     "cors": "latest",
+    "date-fns": "^2.30.0",
     "dompurify": "latest",
-    "ejs": "^3.1.9",
     "embla-carousel-react": "latest",
     "express": "latest",
     "express-rate-limit": "latest",
@@ -82,30 +62,30 @@
     "lucide-react": "^0.454.0",
     "marked": "latest",
     "multer": "latest",
-    "next": "15.2.4",
+    "next": "14.2.16",
     "next-themes": "latest",
     "nodemailer": "latest",
     "path": "latest",
-    "react": "^19",
+    "postcss": "^8",
+    "react": "^18",
     "react-day-picker": "latest",
-    "react-dom": "^19",
+    "react-dom": "^18",
     "react-hook-form": "latest",
     "react-resizable-panels": "latest",
     "recharts": "latest",
     "sonner": "latest",
     "tailwind-merge": "^2.5.5",
+    "tailwindcss": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "nodemon": "^3.0.2",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8.5",
     "typescript": "^5"
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }
