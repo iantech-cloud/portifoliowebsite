@@ -1,318 +1,194 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-</head>
-<body class="bg-gray-50">
-    <div class="min-h-screen">
+<% layout('../layout') -%>
+
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
-        <header class="bg-white shadow-sm border-b">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center py-4">
-                    <div class="flex items-center">
-                        <a href="/admin" class="text-blue-600 hover:text-blue-700 mr-4">
-                            ← Back to Dashboard
-                        </a>
-                        <h1 class="text-2xl font-bold text-gray-900">
-                            <%= isEdit ? 'Edit Post' : 'Create New Post' %>
-                        </h1>
-                    </div>
-                    <div class="flex space-x-3">
-                        <button type="button" id="save-draft" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
-                            Save Draft
-                        </button>
-                        <button type="button" id="publish-post" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                            <%= isEdit ? 'Update Post' : 'Publish Post' %>
-                        </button>
-                    </div>
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">
+                        <%= post ? 'Edit Blog Post' : 'Create New Blog Post' %>
+                    </h1>
+                    <p class="text-gray-600 mt-1">
+                        <%= post ? 'Update your existing blog post' : 'Write and publish a new blog post' %>
+                    </p>
                 </div>
+                <a href="/admin/blog" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Posts
+                </a>
             </div>
-        </header>
+        </div>
 
-        <!-- Main Content -->
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <form id="blog-form" action="/admin/blog/save" method="POST" enctype="multipart/form-data">
-                <% if (isEdit && post) { %>
-                <input type="hidden" name="id" value="<%= post.id %>">
-                <% } %>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Main Editor -->
-                    <div class="lg:col-span-2 space-y-6">
-                        <!-- Title -->
-                        <div class="bg-white rounded-lg shadow-sm p-6">
-                            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
-                                Post Title
-                            </label>
-                            <input type="text" id="title" name="title" required
-                                   value="<%= isEdit && post ? post.title : '' %>"
-                                   placeholder="Enter your post title..."
-                                   class="w-full px-4 py-3 text-xl border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        </div>
-
-                        <!-- Content Editor -->
-                        <div class="bg-white rounded-lg shadow-sm p-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-4">
-                                Post Content
-                            </label>
-                            
-                            <!-- Editor Toolbar -->
-                            <div class="mb-4">
-                                <div class="flex space-x-2 mb-4">
-                                    <button type="button" id="add-image" class="bg-blue-100 text-blue-700 px-3 py-2 rounded text-sm hover:bg-blue-200">
-                                        📷 Add Image
-                                    </button>
-                                    <button type="button" id="add-code" class="bg-gray-100 text-gray-700 px-3 py-2 rounded text-sm hover:bg-gray-200">
-                                        💻 Code Block
-                                    </button>
-                                    <button type="button" id="add-quote" class="bg-yellow-100 text-yellow-700 px-3 py-2 rounded text-sm hover:bg-yellow-200">
-                                        💬 Quote
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Rich Text Editor -->
-                            <div id="editor" style="height: 400px;">
-                                <%= isEdit && post ? post.content : '' %>
-                            </div>
-                            <textarea id="content" name="content" style="display: none;"></textarea>
-                        </div>
-
-                        <!-- Excerpt -->
-                        <div class="bg-white rounded-lg shadow-sm p-6">
-                            <label for="excerpt" class="block text-sm font-medium text-gray-700 mb-2">
-                                Post Excerpt
-                            </label>
-                            <textarea id="excerpt" name="excerpt" rows="3" required
-                                      placeholder="Write a brief excerpt for your post..."
-                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><%= isEdit && post ? post.excerpt : '' %></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Sidebar -->
-                    <div class="space-y-6">
-                        <!-- Publish Settings -->
-                        <div class="bg-white rounded-lg shadow-sm p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Publish Settings</h3>
-                            
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Status
-                                    </label>
-                                    <select id="status" name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                        <option value="draft" <%= isEdit && post && post.status === 'draft' ? 'selected' : '' %>>Draft</option>
-                                        <option value="published" <%= isEdit && post && post.status === 'published' ? 'selected' : '' %>>Published</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" name="featured" 
-                                               <%= isEdit && post && post.featured ? 'checked' : '' %>
-                                               class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                        <span class="ml-2 text-sm text-gray-700">Featured Post</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Categories & Tags -->
-                        <div class="bg-white rounded-lg shadow-sm p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Categories & Tags</h3>
-                            
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Category
-                                    </label>
-                                    <select id="category" name="category" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                        <option value="Technology" <%= isEdit && post && post.category === 'Technology' ? 'selected' : '' %>>Technology</option>
-                                        <option value="Education" <%= isEdit && post && post.category === 'Education' ? 'selected' : '' %>>Education</option>
-                                        <option value="Data Science" <%= isEdit && post && post.category === 'Data Science' ? 'selected' : '' %>>Data Science</option>
-                                        <option value="Cybersecurity" <%= isEdit && post && post.category === 'Cybersecurity' ? 'selected' : '' %>>Cybersecurity</option>
-                                        <option value="Digital Marketing" <%= isEdit && post && post.category === 'Digital Marketing' ? 'selected' : '' %>>Digital Marketing</option>
-                                        <option value="Programming" <%= isEdit && post && post.category === 'Programming' ? 'selected' : '' %>>Programming</option>
-                                        <option value="Business" <%= isEdit && post && post.category === 'Business' ? 'selected' : '' %>>Business</option>
-                                        <option value="General" <%= isEdit && post && post.category === 'General' ? 'selected' : '' %>>General</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="tags" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Tags (comma-separated)
-                                    </label>
-                                    <input type="text" id="tags" name="tags"
-                                           value="<%= isEdit && post && post.tags ? post.tags.join(', ') : '' %>"
-                                           placeholder="python, javascript, tutorial"
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Featured Image -->
-                        <div class="bg-white rounded-lg shadow-sm p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Featured Image</h3>
-                            
-                            <div class="space-y-4">
-                                <input type="file" id="featured-image" name="featuredImage" accept="image/*"
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                
-                                <% if (isEdit && post && post.featuredImage) { %>
-                                <div class="mt-2">
-                                    <img src="<%= post.featuredImage %>" alt="Current featured image" 
-                                         class="w-full h-32 object-cover rounded-lg">
-                                </div>
-                                <% } %>
-                            </div>
-                        </div>
-
-                        <!-- SEO Settings -->
-                        <div class="bg-white rounded-lg shadow-sm p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">SEO Settings</h3>
-                            
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="meta-title" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Meta Title
-                                    </label>
-                                    <input type="text" id="meta-title" name="metaTitle"
-                                           value="<%= isEdit && post && post.metaTitle ? post.metaTitle : '' %>"
-                                           placeholder="SEO title for search engines"
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                                </div>
-
-                                <div>
-                                    <label for="meta-description" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Meta Description
-                                    </label>
-                                    <textarea id="meta-description" name="metaDescription" rows="3"
-                                              placeholder="Brief description for search engines"
-                                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"><%= isEdit && post && post.metaDescription ? post.metaDescription : '' %></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </main>
-    </div>
-
-    <!-- Image Upload Modal -->
-    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-lg p-6 w-full max-w-md">
-                <h3 class="text-lg font-semibold mb-4">Upload Image</h3>
-                <input type="file" id="image-upload" accept="image/*" class="w-full mb-4">
-                <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancel-image" class="px-4 py-2 text-gray-600 hover:text-gray-800">
-                        Cancel
-                    </button>
-                    <button type="button" id="insert-image" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                        Insert Image
-                    </button>
+        <!-- Error Messages -->
+        <% if (errors && errors.length > 0) { %>
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+            <div class="flex">
+                <i class="fas fa-exclamation-circle text-red-400 mr-3 mt-1"></i>
+                <div>
+                    <h3 class="text-sm font-medium text-red-800">Please correct the following errors:</h3>
+                    <ul class="mt-2 text-sm text-red-700 list-disc list-inside">
+                        <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                        <% }) %>
+                    </ul>
                 </div>
             </div>
         </div>
+        <% } %>
+
+        <!-- Blog Editor Form -->
+        <form action="/admin/blog/save" method="POST" class="space-y-6">
+            <% if (post) { %>
+            <input type="hidden" name="id" value="<%= post.id %>">
+            <% } %>
+
+            <!-- Title and Status -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2">
+                        <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                            Post Title *
+                        </label>
+                        <input type="text" id="title" name="title" required
+                               value="<%= post ? post.title : '' %>"
+                               placeholder="Enter your blog post title..."
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                            Status *
+                        </label>
+                        <select id="status" name="status" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="draft" <%= (post && post.status === 'draft') ? 'selected' : '' %>>Draft</option>
+                            <option value="published" <%= (post && post.status === 'published') ? 'selected' : '' %>>Published</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Editor -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <label for="content" class="block text-sm font-medium text-gray-700 mb-2">
+                    Content *
+                </label>
+                <div id="editor-container" class="border border-gray-300 rounded-lg">
+                    <div id="editor" style="height: 400px;"><%= post ? post.content : '' %></div>
+                </div>
+                <textarea id="content" name="content" class="hidden" required><%= post ? post.content : '' %></textarea>
+            </div>
+
+            <!-- Excerpt and Meta -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="space-y-6">
+                    <div>
+                        <label for="excerpt" class="block text-sm font-medium text-gray-700 mb-2">
+                            Excerpt *
+                        </label>
+                        <textarea id="excerpt" name="excerpt" rows="3" required
+                                  placeholder="Brief description of your blog post..."
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><%= post ? post.excerpt : '' %></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+                                Category *
+                            </label>
+                            <select id="category" name="category" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Select category...</option>
+                                <option value="Educational Technology" <%= (post && post.category === 'Educational Technology') ? 'selected' : '' %>>Educational Technology</option>
+                                <option value="Data Science" <%= (post && post.category === 'Data Science') ? 'selected' : '' %>>Data Science</option>
+                                <option value="Digital Marketing" <%= (post && post.category === 'Digital Marketing') ? 'selected' : '' %>>Digital Marketing</option>
+                                <option value="Cybersecurity" <%= (post && post.category === 'Cybersecurity') ? 'selected' : '' %>>Cybersecurity</option>
+                                <option value="Programming" <%= (post && post.category === 'Programming') ? 'selected' : '' %>>Programming</option>
+                                <option value="Technology" <%= (post && post.category === 'Technology') ? 'selected' : '' %>>Technology</option>
+                                <option value="Business" <%= (post && post.category === 'Business') ? 'selected' : '' %>>Business</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="tags" class="block text-sm font-medium text-gray-700 mb-2">
+                                Tags
+                            </label>
+                            <input type="text" id="tags" name="tags"
+                                   value="<%= post && post.tags ? post.tags.join(', ') : '' %>"
+                                   placeholder="Enter tags separated by commas..."
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="featuredImage" class="block text-sm font-medium text-gray-700 mb-2">
+                            Featured Image URL
+                        </label>
+                        <input type="url" id="featuredImage" name="featuredImage"
+                               value="<%= post ? post.featuredImage || '' : '' %>"
+                               placeholder="https://example.com/image.jpg"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex flex-col sm:flex-row gap-4 justify-end">
+                    <button type="button" onclick="saveDraft()" 
+                            class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-save mr-2"></i>Save as Draft
+                    </button>
+                    <button type="submit" 
+                            class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        <%= post && post.status === 'published' ? 'Update Post' : 'Publish Post' %>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
-    <script>
-        // Initialize Quill editor
-        const quill = new Quill('#editor', {
-            theme: 'snow',
-            modules: {
-                toolbar: [
-                    [{ 'header': [1, 2, 3, false] }],
-                    ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    [{ 'align': [] }],
-                    ['link', 'image', 'code-block'],
-                    ['clean']
-                ]
-            }
-        });
+<!-- Quill.js Editor -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
-        // Form submission handlers
-        document.getElementById('save-draft').addEventListener('click', function() {
-            document.getElementById('status').value = 'draft';
-            submitForm();
-        });
+<script>
+// Initialize Quill editor
+var quill = new Quill('#editor', {
+    theme: 'snow',
+    modules: {
+        toolbar: [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'align': [] }],
+            ['blockquote', 'code-block'],
+            ['link', 'image'],
+            ['clean']
+        ]
+    }
+});
 
-        document.getElementById('publish-post').addEventListener('click', function() {
-            document.getElementById('status').value = 'published';
-            submitForm();
-        });
+// Update hidden textarea when content changes
+quill.on('text-change', function() {
+    document.getElementById('content').value = quill.root.innerHTML;
+});
 
-        function submitForm() {
-            // Get content from Quill editor
-            document.getElementById('content').value = quill.root.innerHTML;
-            document.getElementById('blog-form').submit();
-        }
+// Save as draft function
+function saveDraft() {
+    document.getElementById('status').value = 'draft';
+    document.querySelector('form').submit();
+}
 
-        // Image upload functionality
-        document.getElementById('add-image').addEventListener('click', function() {
-            document.getElementById('image-modal').classList.remove('hidden');
-        });
-
-        document.getElementById('cancel-image').addEventListener('click', function() {
-            document.getElementById('image-modal').classList.add('hidden');
-        });
-
-        document.getElementById('insert-image').addEventListener('click', function() {
-            const fileInput = document.getElementById('image-upload');
-            const file = fileInput.files[0];
-            
-            if (file) {
-                const formData = new FormData();
-                formData.append('image', file);
-                
-                fetch('/upload', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.url) {
-                        const range = quill.getSelection();
-                        quill.insertEmbed(range.index, 'image', data.url);
-                    }
-                    document.getElementById('image-modal').classList.add('hidden');
-                })
-                .catch(error => {
-                    console.error('Error uploading image:', error);
-                    alert('Error uploading image');
-                });
-            }
-        });
-
-        // Code block insertion
-        document.getElementById('add-code').addEventListener('click', function() {
-            const range = quill.getSelection();
-            quill.insertText(range.index, '\n');
-            quill.insertEmbed(range.index + 1, 'code-block', '// Your code here');
-        });
-
-        // Quote insertion
-        document.getElementById('add-quote').addEventListener('click', function() {
-            const range = quill.getSelection();
-            quill.formatLine(range.index, range.length, 'blockquote', true);
-        });
-
-        // Auto-save functionality (optional)
-        let autoSaveTimer;
-        quill.on('text-change', function() {
-            clearTimeout(autoSaveTimer);
-            autoSaveTimer = setTimeout(function() {
-                // Auto-save logic here
-                console.log('Auto-saving...');
-            }, 5000);
-        });
-    </script>
-</body>
-</html>
+// Auto-save functionality (optional)
+let autoSaveTimer;
+quill.on('text-change', function() {
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(function() {
+        // Auto-save logic here if needed
+        console.log('Auto-saving...');
+    }, 5000);
+});
+</script>

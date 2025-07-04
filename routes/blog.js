@@ -1,111 +1,117 @@
 const express = require("express")
+const router = express.Router()
 const fs = require("fs-extra")
 const path = require("path")
-const { body, validationResult } = require("express-validator")
-const router = express.Router()
+const { marked } = require("marked")
+const createDOMPurify = require("dompurify")
+const { JSDOM } = require("jsdom")
 
-const BLOG_DATA_FILE = path.join(__dirname, "../data/blog-posts.json")
+const window = new JSDOM("").window
+const DOMPurify = createDOMPurify(window)
 
-// Helper functions
-async function getBlogPosts() {
-  try {
-    const exists = await fs.pathExists(BLOG_DATA_FILE)
-    if (!exists) {
-      await fs.writeJson(BLOG_DATA_FILE, [])
-      return []
-    }
-    return await fs.readJson(BLOG_DATA_FILE)
-  } catch (error) {
-    console.error("Error reading blog posts:", error)
-    return []
-  }
-}
+// Configure marked options
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+})
 
-async function saveBlogPosts(posts) {
-  try {
-    await fs.writeJson(BLOG_DATA_FILE, posts, { spaces: 2 })
-  } catch (error) {
-    console.error("Error saving blog posts:", error)
-  }
-}
-
-function generateSlug(title) {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .trim("-")
-}
-
-// Blog listing page
+// GET blog listing page
 router.get("/", async (req, res) => {
   try {
-    const allPosts = await getBlogPosts()
-    const publishedPosts = allPosts
-      .filter((post) => post.status === "published")
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    const blogFile = path.join(__dirname, "../data/blog-posts.json")
+    let posts = []
 
+    if (await fs.pathExists(blogFile)) {
+      const allPosts = await fs.readJson(blogFile)
+      posts = allPosts
+        .filter((post) => post.status === "published")
+        .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+    }
+
+    // Pagination
     const page = Number.parseInt(req.query.page) || 1
     const limit = 6
     const startIndex = (page - 1) * limit
     const endIndex = page * limit
-
-    const posts = publishedPosts.slice(startIndex, endIndex)
-    const totalPages = Math.ceil(publishedPosts.length / limit)
+    const totalPosts = posts.length
+    const totalPages = Math.ceil(totalPosts / limit)
+    const paginatedPosts = posts.slice(startIndex, endIndex)
 
     res.render("blog", {
-      title: "Blog - Insights & Expertise",
-      pageClass: "blog-page",
-      posts,
+      title: "Blog - Goldmine Portfolio",
+      description:
+        "Insights on educational technology, data science, digital marketing, and cybersecurity from Goldmine Agencies.",
+      posts: paginatedPosts,
       currentPage: page,
       totalPages,
-      hasNextPage: endIndex < publishedPosts.length,
-      hasPrevPage: page > 1,
+      totalPosts,
+      hasNextPage: endIndex < totalPosts,
+      hasPrevPage: startIndex > 0,
+      nextPage: page + 1,
+      prevPage: page - 1,
     })
   } catch (error) {
-    console.error("Error loading blog posts:", error)
+    console.error("Blog listing error:", error)
     res.render("blog", {
-      title: "Blog - Insights & Expertise",
-      pageClass: "blog-page",
+      title: "Blog - Goldmine Portfolio",
+      description:
+        "Insights on educational technology, data science, digital marketing, and cybersecurity from Goldmine Agencies.",
       posts: [],
       currentPage: 1,
-      totalPages: 1,
+      totalPages: 0,
+      totalPosts: 0,
       hasNextPage: false,
       hasPrevPage: false,
     })
   }
 })
 
-// Individual blog post
+// GET individual blog post
 router.get("/:slug", async (req, res) => {
   try {
-    const posts = await getBlogPosts()
-    const post = posts.find((p) => p.slug === req.params.slug && p.status === "published")
+    const slug = req.params.slug
+    const blogFile = path.join(__dirname, "../data/blog-posts.json")
+
+    if (!(await fs.pathExists(blogFile))) {
+      return res.status(404).render("404", {
+        title: "Post Not Found",
+        message: "The blog post you are looking for does not exist.",
+      })
+    }
+
+    const posts = await fs.readJson(blogFile)
+    const post = posts.find((p) => p.slug === slug && p.status === "published")
 
     if (!post) {
       return res.status(404).render("404", {
         title: "Post Not Found",
-        message: "The blog post you're looking for doesn't exist.",
+        message: "The blog post you are looking for does not exist.",
       })
     }
+
+    // Convert markdown to HTML and sanitize
+    const contentHtml = DOMPurify.sanitize(marked(post.content))
 
     // Get related posts
     const relatedPosts = posts
       .filter((p) => p.id !== post.id && p.status === "published")
       .filter((p) => p.category === post.category || p.tags.some((tag) => post.tags.includes(tag)))
+      .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
       .slice(0, 3)
 
     res.render("blog-post", {
-      title: `${post.title} - Blog`,
-      pageClass: "blog-post-page",
-      post,
+      title: `${post.title} - Goldmine Portfolio`,
+      description: post.excerpt,
+      post: {
+        ...post,
+        contentHtml,
+      },
       relatedPosts,
     })
   } catch (error) {
-    console.error("Error loading blog post:", error)
+    console.error("Blog post error:", error)
     res.status(500).render("error", {
-      title: "Error",
+      title: "Server Error",
       message: "An error occurred while loading the blog post.",
     })
   }
