@@ -1,46 +1,79 @@
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import Link from "next/link"
+import { Github, Linkedin, Twitter, Mail } from "lucide-react"
 
 export function Footer() {
   return (
     <footer className="border-t bg-background">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-muted-foreground">© 2024 Portfolio. All rights reserved.</p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Portfolio</h3>
+            <p className="text-sm text-muted-foreground">
+              Creating innovative solutions and beautiful experiences through code.
+            </p>
           </div>
-          <div className="flex space-x-4">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Github className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Linkedin className="h-5 w-5" />
-              <span className="sr-only">LinkedIn</span>
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Twitter className="h-5 w-5" />
-              <span className="sr-only">Twitter</span>
-            </a>
-            <a href="mailto:contact@example.com" className="text-muted-foreground hover:text-primary transition-colors">
-              <Mail className="h-5 w-5" />
-              <span className="sr-only">Email</span>
-            </a>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold">Navigation</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Contact
+                </Link>
+              </li>
+            </ul>
           </div>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold">Services</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="text-muted-foreground">Web Development</li>
+              <li className="text-muted-foreground">UI/UX Design</li>
+              <li className="text-muted-foreground">Mobile Apps</li>
+              <li className="text-muted-foreground">Consulting</li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold">Connect</h4>
+            <div className="flex space-x-4">
+              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Github className="h-5 w-5" />
+                <span className="sr-only">GitHub</span>
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Linkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Twitter className="h-5 w-5" />
+                <span className="sr-only">Twitter</span>
+              </Link>
+              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Mail className="h-5 w-5" />
+                <span className="sr-only">Email</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
+          <p>&copy; 2024 Portfolio. All rights reserved.</p>
         </div>
       </div>
     </footer>

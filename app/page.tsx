@@ -1,5 +1,3 @@
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -7,17 +5,15 @@ import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe } 
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
-
+    <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 px-4 text-center">
-        <div className="container mx-auto max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-            Professional Developer
+      <section className="py-20 px-4 bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+        <div className="container mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            Welcome to My Portfolio
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Creating exceptional digital experiences with modern web technologies and innovative solutions.
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            I'm a passionate developer creating innovative solutions and beautiful experiences
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8">
@@ -32,17 +28,17 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-16 px-4 bg-muted/50">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Technical Skills</h2>
+      <section className="py-16 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Skills & Technologies</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <CardHeader className="text-center">
+            <Card className="text-center">
+              <CardHeader>
                 <Code className="h-12 w-12 mx-auto mb-4 text-primary" />
-                <CardTitle>Frontend</CardTitle>
+                <CardTitle>Frontend Development</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center">
                   <Badge variant="secondary">React</Badge>
                   <Badge variant="secondary">Next.js</Badge>
                   <Badge variant="secondary">TypeScript</Badge>
@@ -51,43 +47,43 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="text-center">
+            <Card className="text-center">
+              <CardHeader>
                 <Database className="h-12 w-12 mx-auto mb-4 text-primary" />
-                <CardTitle>Backend</CardTitle>
+                <CardTitle>Backend Development</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center">
                   <Badge variant="secondary">Node.js</Badge>
                   <Badge variant="secondary">Express</Badge>
-                  <Badge variant="secondary">PostgreSQL</Badge>
                   <Badge variant="secondary">MongoDB</Badge>
+                  <Badge variant="secondary">PostgreSQL</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="text-center">
+            <Card className="text-center">
+              <CardHeader>
                 <Palette className="h-12 w-12 mx-auto mb-4 text-primary" />
                 <CardTitle>Design</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center">
+                  <Badge variant="secondary">UI/UX</Badge>
                   <Badge variant="secondary">Figma</Badge>
                   <Badge variant="secondary">Adobe XD</Badge>
-                  <Badge variant="secondary">UI/UX</Badge>
-                  <Badge variant="secondary">Responsive</Badge>
+                  <Badge variant="secondary">Responsive Design</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="text-center">
+            <Card className="text-center">
+              <CardHeader>
                 <Globe className="h-12 w-12 mx-auto mb-4 text-primary" />
                 <CardTitle>Deployment</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center">
                   <Badge variant="secondary">Vercel</Badge>
                   <Badge variant="secondary">AWS</Badge>
                   <Badge variant="secondary">Docker</Badge>
@@ -100,25 +96,25 @@ export default function Home() {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
+      <section className="py-16 px-4 bg-muted/50">
+        <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="group hover:shadow-lg transition-shadow">
               <CardHeader>
-                <div className="aspect-video bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-lg mb-4 flex items-center justify-center">
+                <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
                   <Code className="h-12 w-12 text-primary" />
                 </div>
                 <CardTitle>E-Commerce Platform</CardTitle>
                 <CardDescription>
-                  Full-stack e-commerce solution with payment integration and admin dashboard.
+                  A full-stack e-commerce solution with modern design and seamless user experience
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2 mb-4">
                   <Badge variant="outline">React</Badge>
                   <Badge variant="outline">Node.js</Badge>
-                  <Badge variant="outline">Stripe</Badge>
+                  <Badge variant="outline">MongoDB</Badge>
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline">
@@ -135,46 +131,48 @@ export default function Home() {
 
             <Card className="group hover:shadow-lg transition-shadow">
               <CardHeader>
-                <div className="aspect-video bg-gradient-to-br from-green-500/20 to-blue-600/20 rounded-lg mb-4 flex items-center justify-center">
-                  <Database className="h-12 w-12 text-green-600" />
+                <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
+                  <Palette className="h-12 w-12 text-primary" />
                 </div>
-                <CardTitle>Task Management App</CardTitle>
+                <CardTitle>Design System</CardTitle>
                 <CardDescription>
-                  Collaborative task management with real-time updates and team features.
+                  A comprehensive design system with reusable components and documentation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge variant="outline">React</Badge>
+                  <Badge variant="outline">Storybook</Badge>
+                  <Badge variant="outline">TypeScript</Badge>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline">
+                    <Github className="h-4 w-4 mr-2" />
+                    Code
+                  </Button>
+                  <Button size="sm">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Live Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
+                  <Database className="h-12 w-12 text-primary" />
+                </div>
+                <CardTitle>Analytics Dashboard</CardTitle>
+                <CardDescription>
+                  Real-time analytics dashboard with interactive charts and data visualization
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2 mb-4">
                   <Badge variant="outline">Next.js</Badge>
-                  <Badge variant="outline">Socket.io</Badge>
+                  <Badge variant="outline">Chart.js</Badge>
                   <Badge variant="outline">PostgreSQL</Badge>
-                </div>
-                <div className="flex gap-2">
-                  <Button size="sm" variant="outline">
-                    <Github className="h-4 w-4 mr-2" />
-                    Code
-                  </Button>
-                  <Button size="sm">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Live Demo
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="group hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="aspect-video bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-lg mb-4 flex items-center justify-center">
-                  <Palette className="h-12 w-12 text-orange-600" />
-                </div>
-                <CardTitle>Portfolio Website</CardTitle>
-                <CardDescription>Responsive portfolio website with dark mode and smooth animations.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="outline">React</Badge>
-                  <Badge variant="outline">Tailwind</Badge>
-                  <Badge variant="outline">Framer Motion</Badge>
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline">
@@ -193,12 +191,12 @@ export default function Home() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-16 px-4 bg-muted/50">
-        <div className="container mx-auto max-w-4xl text-center">
+      <section className="py-16 px-4">
+        <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Let's Work Together</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Ready to bring your ideas to life? I'm always excited to work on new projects and collaborate with amazing
-            people.
+            I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your ideas
+            to life.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8">
@@ -212,8 +210,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   )
 }
