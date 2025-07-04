@@ -63,7 +63,6 @@
     "next-themes": "latest",
     "nodemailer": "latest",
     "path": "latest",
-    "postcss": "^8.4.32",
     "react": "^19",
     "react-day-picker": "latest",
     "react-dom": "^19",
