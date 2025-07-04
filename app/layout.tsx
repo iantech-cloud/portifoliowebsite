@@ -9,8 +9,8 @@ import { Footer } from "@/components/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Portfolio Website",
-  description: "Professional portfolio showcasing my work and skills",
+  title: "Portfolio - Your Name",
+  description: "Full-stack developer specializing in modern web technologies",
     generator: 'v0.dev'
 }
 
@@ -23,9 +23,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navigation />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <div className="min-h-screen flex flex-col">
+            <Navigation />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

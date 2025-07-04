@@ -4,6 +4,16 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Calendar, Clock, User, ArrowLeft, Share2 } from "lucide-react"
 
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  // In a real app, this would fetch from your CMS or database
+  const posts = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }, { id: "5" }]
+
+  return posts.map((post) => ({
+    id: post.id,
+  }))
+}
+
 export default function BlogPostPage({ params }: { params: { id: string } }) {
   // Mock blog post data - in a real app, this would be fetched based on the ID
   const post = {
