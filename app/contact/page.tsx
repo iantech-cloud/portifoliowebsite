@@ -49,19 +49,19 @@ export default function ContactPage() {
     {
       icon: Mail,
       label: "Email",
-      value: "your.email@example.com",
-      href: "mailto:your.email@example.com",
+      value: "muiruriian82@gmail.com",
+      href: "mailto:muiruriian82@gmail.com",
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "+254748264231",
+      href: "tel:+254748264231",
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Your City, Country",
+      value: "Nairobi, Kenya",
       href: "#",
     },
   ]
