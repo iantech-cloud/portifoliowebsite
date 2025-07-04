@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger Menu Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/hamburger-menu.css">
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; }
+        .test-section { margin: 2rem 0; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; }
+        .test-button { background: #3b82f6; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; margin: 0.25rem; }
+        .test-button:hover { background: #2563eb; }
+    </style>
+</head>
+<body>
+    <!-- Test Header -->
+    <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur shadow-sm">
+        <div class="max-w-6xl mx-auto flex h-16 items-center justify-between px-4">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Test Portfolio
+                </span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <a href="/" class="desktop-nav-item active">Home</a>
+                <a href="/about" class="desktop-nav-item">About</a>
+                <a href="/skills" class="desktop-nav-item">Skills</a>
+                <a href="/portfolio" class="desktop-nav-item">Portfolio</a>
+                <a href="/blog" class="desktop-nav-item">Blog</a>
+                <a href="/contact" class="desktop-nav-item">Contact</a>
+            </nav>
+
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay"></div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav-menu" role="navigation" aria-label="Mobile navigation">
+            <!-- Close Button -->
+            <button class="mobile-nav-close" aria-label="Close navigation menu"></button>
+            
+            <!-- Navigation Items -->
+            <div class="mobile-nav-items">
+                <a href="/" class="mobile-nav-item active">Home</a>
+                <a href="/about" class="mobile-nav-item">About</a>
+                <a href="/skills" class="mobile-nav-item">Skills</a>
+                <a href="/portfolio" class="mobile-nav-item">Portfolio</a>
+                <a href="/achievements" class="mobile-nav-item">Achievements</a>
+                <a href="/blog" class="mobile-nav-item">Blog</a>
+                <a href="/contact" class="mobile-nav-item">Contact</a>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="mobile-nav-contact">
+                <h4>Get In Touch</h4>
+                <div class="mobile-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>test@example.com</span>
+                </div>
+                <div class="mobile-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+                <div class="mobile-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Test City, Country</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Test Content -->
+    <main class="max-w-4xl mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-8">Hamburger Menu Test Page</h1>
+        
+        <div class="test-section">
+            <h2 class="text-xl font-semibold mb-4">Manual Testing</h2>
+            <p class="mb-4">Test the hamburger menu functionality:</p>
+            <ul class="list-disc list-inside space-y-2 mb-4">
+                <li>Click the hamburger button (☰) to open the menu</li>
+                <li>Click the overlay or close button (×) to close the menu</li>
+                <li>Try clicking menu items to navigate</li>
+                <li>Test keyboard navigation (Tab, Escape, Alt+M)</li>
+                <li>Resize the window to test responsive behavior</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2 class="text-xl font-semibold mb-4">Programmatic Testing</h2>
+            <p class="mb-4">Test the menu programmatically:</p>
+            <button class="test-button" onclick="MenuUtils.openMenu()">Open Menu</button>
+            <button class="test-button" onclick="MenuUtils.closeMenu()">Close Menu</button>
+            <button class="test-button" onclick="alert('Menu is ' + (MenuUtils.isMenuOpen() ? 'open' : 'closed'))">Check Status</button>
+            <button class="test-button" onclick="MenuUtils.updateActiveItem('/about')">Set About Active</button>
+        </div>
+
+        <div class="test-section">
+            <h2 class="text-xl font-semibold mb-4">Accessibility Testing</h2>
+            <p class="mb-4">Test accessibility features:</p>
+            <ul class="list-disc list-inside space-y-2">
+                <li>Use Tab key to navigate to hamburger button</li>
+                <li>Press Enter or Space to activate</li>
+                <li>Use Tab to navigate through menu items</li>
+                <li>Press Escape to close menu</li>
+                <li>Test with screen reader if available</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2 class="text-xl font-semibold mb-4">Responsive Testing</h2>
+            <p class="mb-4">Test responsive behavior:</p>
+            <ul class="list-disc list-inside space-y-2">
+                <li>Desktop (≥768px): Hamburger hidden, desktop nav visible</li>
+                <li>Mobile (<768px): Hamburger visible, desktop nav hidden</li>
+                <li>Test orientation changes on mobile devices</li>
+                <li>Test different screen sizes and zoom levels</li>
+            </ul>
+        </div>
+
+        <!-- Dummy content for scrolling -->
+        <div class="mt-16 space-y-8">
+            <div class="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                <p class="text-gray-600">Dummy content section 1</p>
+            </div>
+            <div class="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                <p class="text-gray-600">Dummy content section 2</p>
+            </div>
+            <div class="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                <p class="text-gray-600">Dummy content section 3</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/hamburger-menu.js"></script>
+    <script src="/js/menu-integration.js"></script>
+    
+    <!-- Test event listeners -->
+    <script>
+        document.addEventListener('menuOpen', function() {
+            console.log('✅ Menu opened event fired');
+        });
+        
+        document.addEventListener('menuClose', function() {
+            console.log('✅ Menu closed event fired');
+        });
+        
+        // Log when page loads
+        console.log('🧪 Hamburger menu test page loaded');
+        console.log('📱 Current viewport width:', window.innerWidth);
+        console.log('🍔 Menu should be', window.innerWidth >= 768 ? 'hidden' : 'visible');
+    </script>
+</body>
+</html>

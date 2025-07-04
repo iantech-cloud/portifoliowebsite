@@ -1,0 +1,93 @@
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Welcome to My Portfolio</h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            I'm a passionate developer, data scientist, and educator specializing in Python development, data analysis,
+            and cybersecurity.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/portfolio" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-colors">
+                View My Work <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <a href="/contact" class="border border-gray-300 px-8 py-3 rounded-lg text-lg hover:bg-gray-50 transition-colors">
+                Get In Touch
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Key Skills Preview -->
+<section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Core Expertise</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <% keySkills.forEach(function(skill) { %>
+                <div class="text-center p-6 border rounded-lg hover:shadow-lg transition-shadow">
+                    <i class="fas fa-<%= skill.icon %> text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="font-semibold text-lg"><%= skill.name %></h3>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<!-- Quick About -->
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8">About Me</h2>
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+            I'm a dedicated professional with expertise in software development, data science, and cybersecurity. As an
+            educator, I'm passionate about sharing knowledge and helping others grow in the tech industry. My experience
+            spans across multiple programming languages and technologies, with a focus on creating impactful solutions.
+        </p>
+        <a href="/about" class="border border-gray-300 px-8 py-3 rounded-lg text-lg hover:bg-gray-100 transition-colors">
+            Learn More About Me
+        </a>
+    </div>
+</section>
+
+<!-- Recent Work Preview -->
+<section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">Featured Work</h2>
+            <p class="text-lg text-gray-600">A glimpse of my recent projects and achievements</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% featuredProjects.forEach(function(project) { %>
+                <div class="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                    <div class="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <span class="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm mb-2">
+                                <%= project.category %>
+                            </span>
+                            <h3 class="text-lg font-bold text-gray-800"><%= project.title %></h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4"><%= project.description %></p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <% project.technologies.slice(0, 3).forEach(function(tech) { %>
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"><%= tech %></span>
+                            <% }); %>
+                            <% if (project.technologies.length > 3) { %>
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                    +<%= project.technologies.length - 3 %> more
+                                </span>
+                            <% } %>
+                        </div>
+                        <a href="/portfolio" class="text-blue-600 hover:text-blue-700 font-medium">
+                            View Project <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <div class="text-center mt-12">
+            <a href="/portfolio" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-colors">
+                View All Projects <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
