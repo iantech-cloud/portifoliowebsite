@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Database } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone } from "lucide-react"
 import Link from "next/link"
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
             <Button size="lg" asChild>
               <Link href="/contact">Get In Touch</Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button variant="outline" size="lg" asChild>
               <Link href="/portfolio">View My Work</Link>
             </Button>
           </div>
@@ -38,7 +38,9 @@ export default function Home() {
               <CardHeader>
                 <Code className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Frontend Development</CardTitle>
-                <CardDescription>Creating responsive and interactive user interfaces</CardDescription>
+                <CardDescription>
+                  Building responsive and interactive user interfaces with modern frameworks
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
@@ -52,32 +54,34 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <Database className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Backend Development</CardTitle>
-                <CardDescription>Building robust and scalable server-side applications</CardDescription>
+                <Palette className="h-12 w-12 text-primary mb-4" />
+                <CardTitle>UI/UX Design</CardTitle>
+                <CardDescription>
+                  Creating intuitive and visually appealing designs that enhance user experience
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">Node.js</Badge>
-                  <Badge variant="secondary">Python</Badge>
-                  <Badge variant="secondary">PostgreSQL</Badge>
-                  <Badge variant="secondary">MongoDB</Badge>
+                  <Badge variant="secondary">Figma</Badge>
+                  <Badge variant="secondary">Adobe XD</Badge>
+                  <Badge variant="secondary">Prototyping</Badge>
+                  <Badge variant="secondary">User Research</Badge>
                 </div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <Palette className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>UI/UX Design</CardTitle>
-                <CardDescription>Designing intuitive and beautiful user experiences</CardDescription>
+                <Smartphone className="h-12 w-12 text-primary mb-4" />
+                <CardTitle>Mobile Development</CardTitle>
+                <CardDescription>Developing cross-platform mobile applications with native performance</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">Figma</Badge>
-                  <Badge variant="secondary">Adobe XD</Badge>
-                  <Badge variant="secondary">Sketch</Badge>
-                  <Badge variant="secondary">Prototyping</Badge>
+                  <Badge variant="secondary">React Native</Badge>
+                  <Badge variant="secondary">Flutter</Badge>
+                  <Badge variant="secondary">iOS</Badge>
+                  <Badge variant="secondary">Android</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -92,21 +96,31 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((project) => (
               <Card key={project} className="group hover:shadow-lg transition-shadow">
+                <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary/5 rounded-t-lg"></div>
                 <CardHeader>
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg mb-4"></div>
                   <CardTitle className="flex items-center justify-between">
                     Project {project}
                     <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </CardTitle>
                   <CardDescription>
-                    A brief description of this amazing project and what it accomplishes.
+                    A brief description of this amazing project and the technologies used to build it.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     <Badge variant="outline">React</Badge>
-                    <Badge variant="outline">TypeScript</Badge>
-                    <Badge variant="outline">Tailwind</Badge>
+                    <Badge variant="outline">Node.js</Badge>
+                    <Badge variant="outline">MongoDB</Badge>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline">
+                      <Github className="h-4 w-4 mr-2" />
+                      Code
+                    </Button>
+                    <Button size="sm">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Live Demo
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -131,20 +145,14 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
               <Link href="/contact">
-                <Mail className="mr-2 h-4 w-4" />
-                Contact Me
+                <Mail className="h-4 w-4 mr-2" />
+                Send Message
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="https://github.com" target="_blank">
-                <Github className="mr-2 h-4 w-4" />
-                GitHub
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button variant="outline" size="lg" asChild>
               <Link href="https://linkedin.com" target="_blank">
-                <Linkedin className="mr-2 h-4 w-4" />
-                LinkedIn
+                <Linkedin className="h-4 w-4 mr-2" />
+                Connect on LinkedIn
               </Link>
             </Button>
           </div>

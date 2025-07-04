@@ -1,65 +1,73 @@
 import Link from "next/link"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Twitter, Mail } from "lucide-react"
 
 export function Footer() {
   return (
     <footer className="border-t bg-background">
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
-        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            Built with{" "}
-            <Link
-              href="https://nextjs.org"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Next.js
-            </Link>{" "}
-            and{" "}
-            <Link
-              href="https://tailwindcss.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Tailwind CSS
-            </Link>
-            .
-          </p>
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Portfolio</h3>
+            <p className="text-sm text-muted-foreground">Building digital experiences that make a difference.</p>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold">Navigation</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/" className="text-muted-foreground hover:text-foreground">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-muted-foreground hover:text-foreground">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio" className="text-muted-foreground hover:text-foreground">
+                  Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-muted-foreground hover:text-foreground">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold">Services</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="text-muted-foreground">Web Development</li>
+              <li className="text-muted-foreground">UI/UX Design</li>
+              <li className="text-muted-foreground">Mobile Apps</li>
+              <li className="text-muted-foreground">Consulting</li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold">Connect</h4>
+            <div className="flex space-x-4">
+              <Link href="https://github.com" className="text-muted-foreground hover:text-foreground">
+                <Github className="h-5 w-5" />
+              </Link>
+              <Link href="https://linkedin.com" className="text-muted-foreground hover:text-foreground">
+                <Linkedin className="h-5 w-5" />
+              </Link>
+              <Link href="https://twitter.com" className="text-muted-foreground hover:text-foreground">
+                <Twitter className="h-5 w-5" />
+              </Link>
+              <Link href="mailto:contact@example.com" className="text-muted-foreground hover:text-foreground">
+                <Mail className="h-5 w-5" />
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center space-x-4">
-          <Link
-            href="https://github.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Github className="h-5 w-5" />
-            <span className="sr-only">GitHub</span>
-          </Link>
-          <Link
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Linkedin className="h-5 w-5" />
-            <span className="sr-only">LinkedIn</span>
-          </Link>
-          <Link
-            href="https://twitter.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Twitter className="h-5 w-5" />
-            <span className="sr-only">Twitter</span>
-          </Link>
-          <Link href="mailto:contact@example.com" className="text-muted-foreground hover:text-foreground">
-            <Mail className="h-5 w-5" />
-            <span className="sr-only">Email</span>
-          </Link>
+
+        <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
+          <p>&copy; 2024 Portfolio. All rights reserved.</p>
         </div>
       </div>
     </footer>
