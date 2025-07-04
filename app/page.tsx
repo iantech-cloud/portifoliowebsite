@@ -23,25 +23,29 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-primary/5 to-emerald-500/10" />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fillRule=\"evenodd\"%3E%3Cg fill=\"%23000\" fillOpacity=\"0.02\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fillRule=\"evenodd\"%3E%3Cg fill=\"%23fff\" fillOpacity=\"0.02\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
-        
+        <div className="absolute inset-0 opacity-30">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23000' fillOpacity='0.02'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+        </div>
+
         <div className="relative max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
               <div className="space-y-4">
                 <h1 className="text-5xl md:text-7xl font-bold font-poppins">
-                  Hi, I'm{" "}
-                  <span className="gradient-text">
-                    Ian Muiruri
-                  </span>
+                  Hi, I'm <span className="gradient-text">Ian Muiruri</span>
                 </h1>
                 <h2 className="text-2xl md:text-3xl font-medium text-muted-foreground font-poppins">
                   Full Stack Developer & Digital Innovator
                 </h2>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-                  Passionate about creating exceptional digital experiences with modern technologies. 
-                  I build scalable web applications, mobile solutions, and innovative digital products 
-                  that make a difference.
+                  Passionate about creating exceptional digital experiences with modern technologies. I build scalable
+                  web applications, mobile solutions, and innovative digital products that make a difference.
                 </p>
               </div>
 
@@ -52,7 +56,12 @@ export default function HomePage() {
                     View My Work
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-xl hover-lift glass-effect bg-transparent" asChild>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg px-8 py-6 rounded-xl hover-lift glass-effect bg-transparent"
+                  asChild
+                >
                   <Link href="/contact">
                     <Mail className="mr-2 h-5 w-5" />
                     Get In Touch
@@ -160,10 +169,18 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="text-center">
                 <div className="flex flex-wrap gap-2 justify-center">
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">React</Badge>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">Next.js</Badge>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">TypeScript</Badge>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">Tailwind CSS</Badge>
+                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    React
+                  </Badge>
+                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    Next.js
+                  </Badge>
+                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    TypeScript
+                  </Badge>
+                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    Tailwind CSS
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
@@ -177,10 +194,30 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="text-center">
                 <div className="flex flex-wrap gap-2 justify-center">
-                  <Badge variant="secondary" className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">Node.js</Badge>
-                  <Badge variant="secondary" className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">Python</Badge>
-                  <Badge variant="secondary" className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">PostgreSQL</Badge>
-                  <Badge variant="secondary" className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">MongoDB</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                  >
+                    Node.js
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                  >
+                    Python
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                  >
+                    PostgreSQL
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                  >
+                    MongoDB
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
@@ -194,10 +231,30 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="text-center">
                 <div className="flex flex-wrap gap-2 justify-center">
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">AWS</Badge>
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">Docker</Badge>
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">Vercel</Badge>
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">CI/CD</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+                  >
+                    AWS
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+                  >
+                    Docker
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+                  >
+                    Vercel
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+                  >
+                    CI/CD
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
@@ -211,10 +268,30 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="text-center">
                 <div className="flex flex-wrap gap-2 justify-center">
-                  <Badge variant="secondary" className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">React Native</Badge>
-                  <Badge variant="secondary" className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">Flutter</Badge>
-                  <Badge variant="secondary" className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">iOS</Badge>
-                  <Badge variant="secondary" className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">Android</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200"
+                  >
+                    React Native
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200"
+                  >
+                    Flutter
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200"
+                  >
+                    iOS
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200"
+                  >
+                    Android
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
@@ -255,8 +332,8 @@ export default function HomePage() {
                   <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </CardTitle>
                 <CardDescription>
-                  Full-stack e-commerce solution with advanced features including payment integration, 
-                  inventory management, and real-time analytics.
+                  Full-stack e-commerce solution with advanced features including payment integration, inventory
+                  management, and real-time analytics.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -302,8 +379,8 @@ export default function HomePage() {
                   <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </CardTitle>
                 <CardDescription>
-                  Collaborative project management tool with real-time updates, team collaboration, 
-                  and advanced reporting features.
+                  Collaborative project management tool with real-time updates, team collaboration, and advanced
+                  reporting features.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -349,8 +426,8 @@ export default function HomePage() {
                   <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </CardTitle>
                 <CardDescription>
-                  Real-time analytics dashboard with interactive charts, data visualization, 
-                  and comprehensive reporting capabilities.
+                  Real-time analytics dashboard with interactive charts, data visualization, and comprehensive reporting
+                  capabilities.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -378,7 +455,12 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-xl hover-lift glass-effect bg-transparent" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 py-6 rounded-xl hover-lift glass-effect bg-transparent"
+              asChild
+            >
               <Link href="/portfolio">
                 View All Projects
                 <ExternalLink className="ml-2 h-5 w-5" />
@@ -395,8 +477,8 @@ export default function HomePage() {
             Ready to Start Your Next <span className="gradient-text">Project?</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Let's collaborate to bring your ideas to life. I'm passionate about creating 
-            innovative solutions that make a real impact.
+            Let's collaborate to bring your ideas to life. I'm passionate about creating innovative solutions that make
+            a real impact.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 py-6 rounded-xl hover-lift" asChild>
@@ -405,7 +487,12 @@ export default function HomePage() {
                 Start a Conversation
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-xl hover-lift glass-effect bg-transparent" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 py-6 rounded-xl hover-lift glass-effect bg-transparent"
+              asChild
+            >
               <Link href="tel:+254748264231">
                 <Phone className="mr-2 h-5 w-5" />
                 Call Me Now

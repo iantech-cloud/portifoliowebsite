@@ -1,77 +1,63 @@
+import { notFound } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react"
 import Link from "next/link"
-import { notFound } from "next/navigation"
+import Image from "next/image"
 
-// Sample blog posts data
+// This would typically come from a database or CMS
 const blogPosts = [
   {
-    id: "modern-web-development",
-    title: "The Future of Modern Web Development",
-    excerpt: "Exploring the latest trends and technologies shaping the future of web development.",
+    id: "1",
+    title: "Building Modern Web Applications with Next.js 14",
+    excerpt: "Exploring the latest features and best practices for building scalable web applications.",
     content: `
-      <p>Web development has evolved dramatically over the past few years, with new frameworks, tools, and methodologies emerging at a rapid pace. In this article, we'll explore the key trends that are shaping the future of modern web development.</p>
+      <p>Next.js 14 brings exciting new features that make building modern web applications even more powerful and efficient. In this comprehensive guide, we'll explore the key improvements and how to leverage them in your projects.</p>
       
-      <h2>The Rise of Full-Stack Frameworks</h2>
-      <p>Frameworks like Next.js, Nuxt.js, and SvelteKit are revolutionizing how we build web applications by providing full-stack capabilities out of the box. These frameworks offer server-side rendering, static site generation, and API routes in a single package.</p>
+      <h2>App Router Enhancements</h2>
+      <p>The App Router continues to evolve with better performance and developer experience. Key improvements include:</p>
+      <ul>
+        <li>Enhanced server components with better streaming</li>
+        <li>Improved client-side navigation</li>
+        <li>Better error handling and loading states</li>
+      </ul>
       
-      <h2>Edge Computing and Serverless</h2>
-      <p>The shift towards edge computing and serverless architectures is enabling developers to build faster, more scalable applications with reduced infrastructure complexity.</p>
+      <h2>Performance Optimizations</h2>
+      <p>Next.js 14 introduces several performance optimizations that make your applications faster out of the box:</p>
+      <ul>
+        <li>Improved bundling and tree-shaking</li>
+        <li>Better image optimization</li>
+        <li>Enhanced caching strategies</li>
+      </ul>
       
-      <h2>AI-Powered Development Tools</h2>
-      <p>AI tools like GitHub Copilot and ChatGPT are transforming how developers write code, making development more efficient and accessible to newcomers.</p>
+      <h2>Developer Experience</h2>
+      <p>The developer experience continues to improve with better tooling and debugging capabilities.</p>
     `,
-    author: "Ian Muiruri Waigango",
+    author: "Ian Muiruri",
     date: "2024-01-15",
-    readTime: "5 min read",
-    tags: ["Web Development", "Technology", "Future"],
-    category: "Technology",
+    readTime: "8 min read",
+    tags: ["Next.js", "React", "Web Development"],
+    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&h=400&fit=crop",
   },
   {
-    id: "react-best-practices",
-    title: "React Best Practices for 2024",
-    excerpt: "Essential React patterns and practices every developer should know.",
+    id: "2",
+    title: "The Future of TypeScript in 2024",
+    excerpt: "Exploring upcoming TypeScript features and their impact on modern development.",
     content: `
-      <p>React continues to be one of the most popular frontend frameworks, and with its constant evolution, it's important to stay up-to-date with the latest best practices.</p>
+      <p>TypeScript continues to evolve rapidly, with exciting features planned for 2024. Let's explore what's coming and how it will impact our development workflow.</p>
       
-      <h2>Component Composition</h2>
-      <p>Focus on creating small, reusable components that follow the single responsibility principle. This makes your code more maintainable and testable.</p>
+      <h2>Type System Improvements</h2>
+      <p>The TypeScript team is working on several enhancements to the type system that will make it even more powerful and expressive.</p>
       
-      <h2>Custom Hooks</h2>
-      <p>Extract complex logic into custom hooks to promote reusability and separation of concerns.</p>
-      
-      <h2>Performance Optimization</h2>
-      <p>Use React.memo, useMemo, and useCallback judiciously to prevent unnecessary re-renders.</p>
+      <h2>Performance Enhancements</h2>
+      <p>Significant performance improvements are coming that will make TypeScript compilation faster and more efficient.</p>
     `,
-    author: "Ian Muiruri Waigango",
+    author: "Ian Muiruri",
     date: "2024-01-10",
-    readTime: "7 min read",
-    tags: ["React", "JavaScript", "Best Practices"],
-    category: "Development",
-  },
-  {
-    id: "typescript-guide",
-    title: "TypeScript: A Complete Guide for Beginners",
-    excerpt: "Learn TypeScript from scratch and understand why it's essential for modern development.",
-    content: `
-      <p>TypeScript has become an essential tool for modern JavaScript development, providing type safety and better developer experience.</p>
-      
-      <h2>Why TypeScript?</h2>
-      <p>TypeScript adds static type checking to JavaScript, helping catch errors at compile time rather than runtime.</p>
-      
-      <h2>Getting Started</h2>
-      <p>Setting up TypeScript in your project is straightforward with modern tooling and frameworks.</p>
-      
-      <h2>Advanced Features</h2>
-      <p>Explore generics, utility types, and advanced patterns that make TypeScript powerful.</p>
-    `,
-    author: "Ian Muiruri Waigango",
-    date: "2024-01-05",
-    readTime: "10 min read",
-    tags: ["TypeScript", "JavaScript", "Tutorial"],
-    category: "Tutorial",
+    readTime: "6 min read",
+    tags: ["TypeScript", "JavaScript", "Programming"],
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=400&fit=crop",
   },
 ]
 
@@ -81,13 +67,7 @@ export async function generateStaticParams() {
   }))
 }
 
-interface BlogPostPageProps {
-  params: {
-    id: string
-  }
-}
-
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPost({ params }: { params: { id: string } }) {
   const post = blogPosts.find((p) => p.id === params.id)
 
   if (!post) {
@@ -95,75 +75,61 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4">
+    <div className="min-h-screen py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <Button variant="ghost" asChild className="mb-6">
+          <Button variant="ghost" asChild>
             <Link href="/blog">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Blog
             </Link>
           </Button>
-
-          <div className="space-y-4">
-            <Badge variant="secondary" className="mb-4">
-              {post.category}
-            </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold font-poppins leading-tight">{post.title}</h1>
-            <p className="text-xl text-muted-foreground">{post.excerpt}</p>
-          </div>
-
-          <div className="flex items-center gap-6 mt-8 pt-8 border-t">
-            <div className="flex items-center gap-2">
-              <User className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">{post.author}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">{post.readTime}</span>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mt-4">
-            {post.tags.map((tag) => (
-              <Badge key={tag} variant="outline">
-                {tag}
-              </Badge>
-            ))}
-          </div>
         </div>
 
-        <Card className="glass-effect">
-          <CardContent className="p-8">
-            <div
-              className="prose prose-lg max-w-none dark:prose-invert"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </CardContent>
-        </Card>
-
-        <div className="mt-12 text-center">
-          <h3 className="text-2xl font-bold mb-4">Enjoyed this article?</h3>
-          <p className="text-muted-foreground mb-6">Let's connect and discuss more about technology and development.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild>
-              <Link href="/contact">Get in Touch</Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/blog">Read More Articles</Link>
-            </Button>
+        <article>
+          <div className="relative h-64 md:h-96 mb-8 rounded-2xl overflow-hidden">
+            <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" priority />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           </div>
-        </div>
+
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+
+              <h1 className="text-4xl md:text-5xl font-bold font-poppins">{post.title}</h1>
+
+              <div className="flex items-center gap-6 text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  <span>{post.author}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>{new Date(post.date).toLocaleDateString()}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  <span>{post.readTime}</span>
+                </div>
+              </div>
+            </div>
+
+            <Card>
+              <CardContent className="p-8">
+                <div
+                  className="prose prose-lg max-w-none dark:prose-invert"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </CardContent>
+            </Card>
+          </div>
+        </article>
       </div>
     </div>
   )

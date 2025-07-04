@@ -5,8 +5,13 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { Toaster } from "@/components/ui/toaster"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -16,8 +21,8 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Ian Muiruri Waigango - Full Stack Developer",
   description:
-    "Professional portfolio of Ian Muiruri Waigango - Full Stack Developer specializing in modern web technologies, mobile development, and innovative digital solutions.",
-  keywords: "Ian Muiruri, Waigango, Full Stack Developer, Web Developer, React, Next.js, Node.js, Kenya Developer",
+    "Full Stack Developer & Digital Innovator specializing in modern web applications, mobile solutions, and innovative digital products.",
+  keywords: "Full Stack Developer, Web Developer, React, Next.js, TypeScript, Node.js, Kenya Developer",
   authors: [{ name: "Ian Muiruri Waigango" }],
   creator: "Ian Muiruri Waigango",
   openGraph: {
@@ -25,13 +30,27 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://ianmuiruri.dev",
     title: "Ian Muiruri Waigango - Full Stack Developer",
-    description: "Professional portfolio showcasing innovative web solutions and development expertise",
+    description:
+      "Full Stack Developer & Digital Innovator specializing in modern web applications and innovative digital solutions.",
     siteName: "Ian Muiruri Portfolio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Ian Muiruri Waigango - Full Stack Developer",
-    description: "Professional portfolio showcasing innovative web solutions and development expertise",
+    description:
+      "Full Stack Developer & Digital Innovator specializing in modern web applications and innovative digital solutions.",
+    creator: "@ianmuiruri",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
     generator: 'v0.dev'
 }
@@ -42,14 +61,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-inter antialiased">
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${poppins.variable} font-inter antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="min-h-screen flex flex-col bg-gradient-to-br from-background via-background to-brand-50/20 dark:to-brand-950/20">
+          <div className="relative flex min-h-screen flex-col">
             <Navigation />
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
