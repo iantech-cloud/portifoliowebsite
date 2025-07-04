@@ -1,46 +1,45 @@
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Smartphone } from "lucide-react"
-import Link from "next/link"
+import { Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe } from "lucide-react"
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-background">
+      <Navigation />
+
       {/* Hero Section */}
-      <section className="text-center py-20">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Hi, I'm <span className="text-primary">John Doe</span>
+      <section className="py-20 px-4 text-center">
+        <div className="container mx-auto max-w-4xl">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+            Professional Developer
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8">Full-Stack Developer & UI/UX Designer</p>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I create beautiful, functional, and user-centered digital experiences. With expertise in modern web
-            technologies and design principles.
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Creating exceptional digital experiences with modern web technologies and innovative solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" asChild>
-              <Link href="/contact">Get In Touch</Link>
+            <Button size="lg" className="text-lg px-8">
+              View My Work
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/portfolio">View My Work</Link>
+            <Button size="lg" variant="outline" className="text-lg px-8 bg-transparent">
+              <Mail className="mr-2 h-5 w-5" />
+              Get In Touch
             </Button>
           </div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">What I Do</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      <section className="py-16 px-4 bg-muted/50">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold text-center mb-12">Technical Skills</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card>
-              <CardHeader>
-                <Code className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Frontend Development</CardTitle>
-                <CardDescription>
-                  Building responsive and interactive user interfaces with modern frameworks
-                </CardDescription>
+              <CardHeader className="text-center">
+                <Code className="h-12 w-12 mx-auto mb-4 text-primary" />
+                <CardTitle>Frontend</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
@@ -53,35 +52,46 @@ export default function Home() {
             </Card>
 
             <Card>
-              <CardHeader>
-                <Palette className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>UI/UX Design</CardTitle>
-                <CardDescription>
-                  Creating intuitive and visually appealing designs that enhance user experience
-                </CardDescription>
+              <CardHeader className="text-center">
+                <Database className="h-12 w-12 mx-auto mb-4 text-primary" />
+                <CardTitle>Backend</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">Figma</Badge>
-                  <Badge variant="secondary">Adobe XD</Badge>
-                  <Badge variant="secondary">Prototyping</Badge>
-                  <Badge variant="secondary">User Research</Badge>
+                  <Badge variant="secondary">Node.js</Badge>
+                  <Badge variant="secondary">Express</Badge>
+                  <Badge variant="secondary">PostgreSQL</Badge>
+                  <Badge variant="secondary">MongoDB</Badge>
                 </div>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader>
-                <Smartphone className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Mobile Development</CardTitle>
-                <CardDescription>Developing cross-platform mobile applications with native performance</CardDescription>
+              <CardHeader className="text-center">
+                <Palette className="h-12 w-12 mx-auto mb-4 text-primary" />
+                <CardTitle>Design</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">React Native</Badge>
-                  <Badge variant="secondary">Flutter</Badge>
-                  <Badge variant="secondary">iOS</Badge>
-                  <Badge variant="secondary">Android</Badge>
+                  <Badge variant="secondary">Figma</Badge>
+                  <Badge variant="secondary">Adobe XD</Badge>
+                  <Badge variant="secondary">UI/UX</Badge>
+                  <Badge variant="secondary">Responsive</Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="text-center">
+                <Globe className="h-12 w-12 mx-auto mb-4 text-primary" />
+                <CardTitle>Deployment</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary">Vercel</Badge>
+                  <Badge variant="secondary">AWS</Badge>
+                  <Badge variant="secondary">Docker</Badge>
+                  <Badge variant="secondary">CI/CD</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -90,74 +100,120 @@ export default function Home() {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-muted/50">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((project) => (
-              <Card key={project} className="group hover:shadow-lg transition-shadow">
-                <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary/5 rounded-t-lg"></div>
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    Project {project}
-                    <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </CardTitle>
-                  <CardDescription>
-                    A brief description of this amazing project and the technologies used to build it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline">React</Badge>
-                    <Badge variant="outline">Node.js</Badge>
-                    <Badge variant="outline">MongoDB</Badge>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="outline">
-                      <Github className="h-4 w-4 mr-2" />
-                      Code
-                    </Button>
-                    <Button size="sm">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Live Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/portfolio">View All Projects</Link>
-            </Button>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="group hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="aspect-video bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-lg mb-4 flex items-center justify-center">
+                  <Code className="h-12 w-12 text-primary" />
+                </div>
+                <CardTitle>E-Commerce Platform</CardTitle>
+                <CardDescription>
+                  Full-stack e-commerce solution with payment integration and admin dashboard.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge variant="outline">React</Badge>
+                  <Badge variant="outline">Node.js</Badge>
+                  <Badge variant="outline">Stripe</Badge>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline">
+                    <Github className="h-4 w-4 mr-2" />
+                    Code
+                  </Button>
+                  <Button size="sm">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Live Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="aspect-video bg-gradient-to-br from-green-500/20 to-blue-600/20 rounded-lg mb-4 flex items-center justify-center">
+                  <Database className="h-12 w-12 text-green-600" />
+                </div>
+                <CardTitle>Task Management App</CardTitle>
+                <CardDescription>
+                  Collaborative task management with real-time updates and team features.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge variant="outline">Next.js</Badge>
+                  <Badge variant="outline">Socket.io</Badge>
+                  <Badge variant="outline">PostgreSQL</Badge>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline">
+                    <Github className="h-4 w-4 mr-2" />
+                    Code
+                  </Button>
+                  <Button size="sm">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Live Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="aspect-video bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-lg mb-4 flex items-center justify-center">
+                  <Palette className="h-12 w-12 text-orange-600" />
+                </div>
+                <CardTitle>Portfolio Website</CardTitle>
+                <CardDescription>Responsive portfolio website with dark mode and smooth animations.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge variant="outline">React</Badge>
+                  <Badge variant="outline">Tailwind</Badge>
+                  <Badge variant="outline">Framer Motion</Badge>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline">
+                    <Github className="h-4 w-4 mr-2" />
+                    Code
+                  </Button>
+                  <Button size="sm">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Live Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Contact CTA */}
-      <section className="py-20">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-16 px-4 bg-muted/50">
+        <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold mb-6">Let's Work Together</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your ideas
-            to life.
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Ready to bring your ideas to life? I'm always excited to work on new projects and collaborate with amazing
+            people.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" asChild>
-              <Link href="/contact">
-                <Mail className="h-4 w-4 mr-2" />
-                Send Message
-              </Link>
+            <Button size="lg" className="text-lg px-8">
+              <Mail className="mr-2 h-5 w-5" />
+              Send Message
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="https://linkedin.com" target="_blank">
-                <Linkedin className="h-4 w-4 mr-2" />
-                Connect on LinkedIn
-              </Link>
+            <Button size="lg" variant="outline" className="text-lg px-8 bg-transparent">
+              <Linkedin className="mr-2 h-5 w-5" />
+              Connect on LinkedIn
             </Button>
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   )
 }
