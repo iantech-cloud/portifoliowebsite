@@ -8,9 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Portfolio</h3>
-            <p className="text-sm text-muted-foreground">
-              Creating innovative solutions and beautiful experiences through code.
-            </p>
+            <p className="text-sm text-muted-foreground">Building innovative solutions with modern technologies.</p>
           </div>
 
           <div className="space-y-4">
@@ -27,8 +25,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Portfolio
+                <Link href="/projects" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Projects
                 </Link>
               </li>
               <li>
@@ -43,8 +41,8 @@ export function Footer() {
             <h4 className="text-sm font-semibold">Services</h4>
             <ul className="space-y-2 text-sm">
               <li className="text-muted-foreground">Web Development</li>
-              <li className="text-muted-foreground">UI/UX Design</li>
               <li className="text-muted-foreground">Mobile Apps</li>
+              <li className="text-muted-foreground">UI/UX Design</li>
               <li className="text-muted-foreground">Consulting</li>
             </ul>
           </div>
