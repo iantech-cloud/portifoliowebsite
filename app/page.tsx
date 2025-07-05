@@ -81,7 +81,7 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full hover-lift" asChild>
-                  <Link href="mailto:ian@ianmuiruri.dev">
+                  <Link href="mailto:muiruriian82@gmail.com">
                     <Mail className="h-6 w-6" />
                   </Link>
                 </Button>
@@ -350,7 +350,7 @@ export default function HomePage() {
                     </Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild>
-                    <Link href="#" target="_blank">
+                    <Link href="https://github.com/iantech-cloud" target="_blank">
                       <Github className="h-4 w-4 mr-1" />
                       Code
                     </Link>
@@ -397,7 +397,7 @@ export default function HomePage() {
                     </Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild>
-                    <Link href="#" target="_blank">
+                    <Link href="https://v0-modern-portfolio-website-pi-peach.vercel.app/" target="_blank">
                       <Github className="h-4 w-4 mr-1" />
                       Code
                     </Link>
@@ -438,13 +438,13 @@ export default function HomePage() {
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" asChild>
-                    <Link href="#" target="_blank">
+                    <Link href="https://v0-football-website-with-api.vercel.app/" target="_blank">
                       <ExternalLink className="h-4 w-4 mr-1" />
                       Live Demo
                     </Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild>
-                    <Link href="#" target="_blank">
+                    <Link href="malto:muiruriian82@gmail.com" target="_blank">
                       <Github className="h-4 w-4 mr-1" />
                       Code
                     </Link>

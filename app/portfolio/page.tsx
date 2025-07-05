@@ -14,7 +14,7 @@ export default function PortfolioPage() {
         "A comprehensive analytics platform built with Python and machine learning algorithms to provide customer insights, predictive analytics, and business intelligence. Features include customer segmentation, churn prediction, and revenue forecasting.",
       technologies: ["Python", "Pandas", "Scikit-learn", "Plotly", "Flask", "MySQL"],
       image: "/placeholder.svg?height=300&width=400",
-      demoUrl: "#",
+      demoUrl: "https://v0-football-website-with-api.vercel.app/",
       codeUrl: "#",
       featured: true,
       status: "Completed",
